@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser; // <-- Tambahkan ini
+use Filament\Panel; // <-- Tambahkan ini
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -46,6 +48,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+     public function canAccessPanel(Panel $panel): bool
+    {
+        // Izinkan akses hanya jika peran user adalah 'admin' atau 'instructor'
+        return in_array($this->role, ['admin', 'instructor']);
     }
 
     // ==========================================================
