@@ -20,11 +20,11 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Platform Management';
 
-    public static function canViewAny(): bool
-    {
-        // Hanya user dengan role 'admin' yang bisa melihat halaman ini.
-        return auth()->user()->role === 'admin';
-    }
+    // public static function canViewAny(): bool
+    // {
+    //     // Hanya user dengan role 'admin' yang bisa melihat halaman ini.
+    //     return auth()->user()->role === 'admin';
+    // }
 
     public static function form(Form $form): Form
     {
