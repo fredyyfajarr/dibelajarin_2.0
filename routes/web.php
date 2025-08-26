@@ -12,6 +12,7 @@ use App\Http\Controllers\QuizPageController;
 use App\Http\Controllers\QuizAttemptController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\LeaderboardController;
 
 // <-- TAMBAHKAN BARIS INI DI SINI
 Route::get('/admin/login', fn() => redirect()->route('login'))->name('filament.admin.auth.login');
@@ -46,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/quiz-attempts/{attempt}', [QuizAttemptController::class, 'show'])->name('quizzes.result');
 
-
+    Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 });
 
 
