@@ -18,10 +18,10 @@ class CategoryResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationGroup = 'Platform Management';
 
-    // public static function canViewAny(): bool
-    // {
-    //     return auth()->user()->role === 'admin';
-    // }
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->role === 'admin';
+    }
 
     public static function form(Form $form): Form
     {
