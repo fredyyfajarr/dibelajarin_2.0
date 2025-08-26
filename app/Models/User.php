@@ -51,10 +51,17 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
      public function canAccessPanel(Panel $panel): bool
-    {
-        // Izinkan akses hanya jika peran user adalah 'admin' atau 'instructor'
-        return in_array($this->role, ['admin', 'instructor']);
-    }
+        {
+            // Log informasi pengguna yang mencoba mengakses
+            Log::info('Mencoba akses panel: ' . $this->email . ' | Peran: ' . $this->role);
+
+            $isAllowed = in_array($this->role, ['admin', 'instructor']);
+
+            // Log hasil pemeriksaan
+            Log::info('Akses diizinkan: ' . ($isAllowed ? 'Ya' : 'Tidak'));
+
+            return $isAllowed;
+        }
 
     // ==========================================================
     // TAMBAHKAN METHOD INI
