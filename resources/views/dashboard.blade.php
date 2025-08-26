@@ -1,4 +1,4 @@
-<x-app-layout>
+{{-- <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
@@ -55,5 +55,42 @@
                 </div>
             </div>
         </div>
+    </div>
+</x-app-layout> --}}
+
+<x-app-layout>
+    {{-- ============================================= --}}
+    {{-- KOTAK DEBUG SEMENTARA --}}
+    {{-- ============================================= --}}
+    <div class="pt-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="p-6 bg-red-800 text-white rounded-lg shadow-md border-2 border-red-500">
+                <h2 class="text-xl font-bold mb-4">Informasi Debug Pengguna</h2>
+                @if (auth()->check())
+                    <p class="text-green-400 font-bold">Status: Berhasil Login</p>
+                    <pre class="mt-4 p-4 bg-slate-900 rounded-md overflow-auto text-lg">
+ID:    {{ auth()->user()->id ?? 'N/A' }}
+Name:  {{ auth()->user()->name ?? 'N/A' }}
+Email: {{ auth()->user()->email ?? 'N/A' }}
+Role:  '{{ auth()->user()->role ?? 'N/A' }}'  <-- PERHATIKAN NILAI INI
+                    </pre>
+                @else
+                    <p class="text-yellow-400 font-bold">Status: Gagal Mendapatkan Sesi Pengguna (Tamu)</p>
+                @endif
+            </div>
+        </div>
+    </div>
+    {{-- ============================================= --}}
+    {{-- AKHIR KOTAK DEBUG --}}
+    {{-- ============================================= --}}
+
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        {{-- ... (sisa kode dashboard Anda) ... --}}
     </div>
 </x-app-layout>
