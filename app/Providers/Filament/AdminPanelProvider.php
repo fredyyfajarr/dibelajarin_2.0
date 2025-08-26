@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Http\Middleware\CheckFilamentAccess; // <-- Tambahkan ini
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -26,7 +25,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('admin')
+            ->id('admin', 'instructor')
             ->path('admin')
             ->login()
             ->colors([
@@ -61,10 +60,10 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])
+                'verified',
+                ])
             ->authMiddleware([
-                // GANTI BAGIAN INI
-                CheckFilamentAccess::class,
+                Authenticate::class,
             ]);
     }
 }
