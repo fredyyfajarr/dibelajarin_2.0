@@ -44,10 +44,14 @@ class CourseResource extends Resource
                     ->unique(Course::class, 'slug', ignoreRecord: true)
                     ->disabled(fn (string $operation): bool => $operation !== 'create'),
                 FileUpload::make('thumbnail')
-                    ->image() // Menampilkan preview gambar
-                    ->directory('course-thumbnails') // Simpan di folder storage/app/public/course-thumbnails
+                    ->image()
                     ->disk('public')
-                    ->columnSpanFull(), // Agar lebarnya penuh
+                    ->directory('course-thumbnails')
+                    ->visibility('public') // <-- Baris ini
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->preserveFilenames() 
+                    ->maxSize(2048)
+                    ->columnSpanFull(),
                 RichEditor::make('description')
                     ->required()
                     ->fileAttachmentsDisk('public') // <-- TAMBAHKAN INI
